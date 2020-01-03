@@ -1,5 +1,5 @@
-/*****************************
- * CODING CHALLENGE 2
+/*
+Coding Challenge 2
  */
 
 // John and Mike both play basketball in different teams. In the latest 3 games, John's team scored 89, 120 and 103 points, while Mike's team scored 116, 94 and 123 points.
