@@ -41,14 +41,16 @@ let johnFamilyHoliday = {
             // John likes to tip 20% of the bill when the bill is less than $50, 15% when the bill is between $50 and
             // $200, and 10% if the bill is more than $200.
             let percentage = .1
-            if (this.bills[i] < 50) {
+            let bill = this.bills[i]
+
+            if (bill < 50) {
                 percentage = .2
             }
-            else if (this.bills[i] <= 200) {
+            else if (bill <= 200) {
                 percentage = .15
             }
-            this.tips[i] = this.bills[i] * percentage
-            this.totals[i] = this.bills[i] + this.tips[i]
+            this.tips[i] = bill * percentage
+            this.totals[i] = bill + this.tips[i]
         }
     }
 }
@@ -64,14 +66,15 @@ let markFamilyHoliday = {
             // Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the bill is between $100 and
             // $300, and 25% if the bill is more than $300 (different than John).
             let percentage = .25
-            if (this.bills[i] < 100) {
+            let bill = this.bills[i]
+            if (bill < 100) {
                 percentage = .2
             }
-            else if (this.bills[i] <= 300) {
+            else if (bill <= 300) {
                 percentage = .1
             }
-            this.tips[i] = this.bills[i] * percentage
-            this.totals[i] = this.bills[i] + this.tips[i]
+            this.tips[i] = bill * percentage
+            this.totals[i] = bill + this.tips[i]
         }
     }
 }
