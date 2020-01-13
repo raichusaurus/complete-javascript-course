@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer, gamePlaying
+let scores, roundScore, prevRoll, activePlayer, gamePlaying, finalScore
 
 init()
 
@@ -25,9 +25,19 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
         // 3. Update the round score IF the rolled number was NOT a 1
         if (dice != 1) {
-            // add score
-            roundScore += dice
-            document.querySelector('#current-' + activePlayer).textContent = roundScore
+
+            // challenge 1
+            if (dice == 6 && prevRoll == 6) {
+                scores[activePlayer] = 0
+                document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+                nextPlayer()
+            }
+            else {
+                // add score
+                roundScore += dice
+                document.querySelector('#current-' + activePlayer).textContent = roundScore
+                prevRoll = dice
+            }
         }
         else {
             // next player
@@ -44,8 +54,13 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         // update the ui
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
 
+        finalScore = document.querySelector('.final-score').value
+        if (!finalScore) {
+            finalScore = 100
+        }
+
         // check if player won the game
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= finalScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner'
             document.querySelector('.dice').style.display = 'none'
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner')
@@ -64,6 +79,7 @@ document.querySelector('.btn-new').addEventListener('click', init)
 function init() {
     scores = [0, 0]
     roundScore = 0
+    prevRoll = 0
     activePlayer = 1
     gamePlaying = true
 
@@ -88,6 +104,7 @@ function init() {
 function nextPlayer() {
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
     roundScore = 0
+    prevRoll = 0
 
     document.getElementById('current-0').textContent = '0'
     document.getElementById('current-1').textContent = '0'
