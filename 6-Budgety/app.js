@@ -2,7 +2,28 @@
 // BUDGET CONTROLLER
 let budgetController = (function() {
 
-    // Some code
+    let Expense = function(id, description, value) {
+        this.id = id
+        this.description = description
+        this.value = value
+    }
+
+    let Income = function(id, description, value) {
+        this.id = id
+        this.description = description
+        this.value = value
+    }
+
+    let data = {
+        allItems: {
+            allExpenses: [],
+            allIncomes: []
+        },
+        totals: {
+            totalExpenses: 0,
+            totalIncome: 0
+        }
+    }
 
 })()
 
