@@ -109,7 +109,8 @@ let UIController = (function() {
         budgetLabel: '.budget__value',
         incomeLabel: '.budget__income--value',
         expensesLabel: '.budget__expenses--value',
-        percentageLabel: '.budget__expenses--percentage'
+        percentageLabel: '.budget__expenses--percentage',
+        container: '.container'
     }
 
     return {
@@ -128,7 +129,7 @@ let UIController = (function() {
 
             if (type === 'inc') {
                 element = DOMStrings.incomeContainer
-                html = '<div class="item clearfix" id="income-%id%">' +
+                html = '<div class="item clearfix" id="inc-%id%">' +
                     '<div class="item__description">%description%</div>' +
                     '<div class="right clearfix">' +
                     '<div class="item__value">%value%</div>' +
@@ -140,7 +141,7 @@ let UIController = (function() {
             }
             else if (type === 'exp') {
                 element = DOMStrings.expenseContainer
-                html = '<div class="item clearfix" id="expense-%id%">' +
+                html = '<div class="item clearfix" id="exp-%id%">' +
                     '<div class="item__description">%description%</div>' +
                     '<div class="right clearfix">' +
                     '<div class="item__value">%value%</div>' +
@@ -209,6 +210,8 @@ let controller = (function(budgetCtrl, UICtrl) {
                 ctrlAddItem()
             }
         })
+
+        document.querySelector(DOMStrings.container).addEventListener('click', ctrlDeleteItem)
     }
 
     let updateBudget = function() {
@@ -242,6 +245,24 @@ let controller = (function(budgetCtrl, UICtrl) {
             // 5. Calculate and update budget
             updateBudget()
         }
+    }
+
+    let ctrlDeleteItem = function(event) {
+        let itemID, splitID, type, ID
+
+        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id
+
+        if (itemID) {
+            splitID = itemID.split('-')
+            type = splitID[0]
+            ID = splitID[1]
+        }
+
+        // 1. delete the item from the data structure
+
+        // 2. delete the item from the UI
+
+        // 3. Update and show the new budget
     }
 
     return {
