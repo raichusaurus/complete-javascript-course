@@ -135,6 +135,7 @@ let UIController = (function() {
                 value : parseFloat(document.querySelector(DOMStrings.inputValue).value)
             }
         },
+
         addListItem: function(newItem, type) {
 
             // Create HTML string with placeholder text
@@ -174,6 +175,13 @@ let UIController = (function() {
 
             // Insert the HTML into the DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHTML)
+        },
+
+        deleteListItem: function(selectorID) {
+
+            let element = document.getElementById(selectorID)
+
+            element.parentNode.removeChild(element)
         },
 
         clearFields: function() {
@@ -276,8 +284,10 @@ let controller = (function(budgetCtrl, UICtrl) {
         budgetCtrl.deleteItem(type, ID)
 
         // 2. delete the item from the UI
+        UICtrl.deleteListItem(itemID)
 
         // 3. Update and show the new budget
+        updateBudget()
     }
 
     return {
