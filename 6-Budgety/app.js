@@ -105,7 +105,11 @@ let UIController = (function() {
         inputValue: '.add__value',
         inputBtn: '.add__btn',
         incomeContainer: '.income__list',
-        expenseContainer: '.expenses__list'
+        expenseContainer: '.expenses__list',
+        budgetLabel: '.budget__value',
+        incomeLabel: '.budget__income--value',
+        expensesLabel: '.budget__expenses--value',
+        percentageLabel: '.budget__expenses--percentage'
     }
 
     return {
@@ -171,6 +175,18 @@ let UIController = (function() {
             fieldsArr[0].focus()
         },
 
+        displayBudget: function(budget) {
+            document.querySelector(DOMStrings.budgetLabel).textContent = budget.budget
+            document.querySelector(DOMStrings.incomeLabel).textContent = budget.totalInc
+            document.querySelector(DOMStrings.expensesLabel).textContent = budget.totalExp
+            if (budget.percentage > 0) {
+                document.querySelector(DOMStrings.percentageLabel).textContent = budget.percentage + '%'
+            }
+            else {
+                document.querySelector(DOMStrings.percentageLabel).textContent = '---'
+            }
+        },
+
         getDOMStrings: function() {
             return DOMStrings
         }
@@ -204,7 +220,7 @@ let controller = (function(budgetCtrl, UICtrl) {
         let budget = budgetCtrl.getBudget()
 
         // 3. Display the budget on the UI
-        console.log(budget)
+        UICtrl.displayBudget(budget)
     }
 
     let ctrlAddItem = function() {
@@ -231,6 +247,12 @@ let controller = (function(budgetCtrl, UICtrl) {
     return {
         init: function() {
             console.log('Application has started.')
+            UICtrl.displayBudget({
+                budget: 0,
+                totalInc: 0,
+                totalExp: 0,
+                percentage: 0
+            })
             setupEventListeners()
         }
     }
